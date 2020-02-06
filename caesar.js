@@ -1,4 +1,4 @@
-let text = "my and is bill"
+let text = "my name is Bill"
 
 const al = "abcdefghijklmnopqrstuvwxyz"
 const alArray = al.split("")
@@ -36,6 +36,20 @@ const caesarEncryption = function(txt, num) {
     for ( ii = 0; ii < txtArray.length; ii ++){
         // console.log(txtArray[ii])
         // console.log(alArray.findIndex(e => e === txtArray[ii]))
+        txtArray[ii] = alArray[newAlArray.findIndex(e => e === txtArray[ii])]
+    }
+    // console.log(txtArray)
+    // console.log(newAlArray)
+    return txtArray.join("")
+}
+
+const caesarDecryption = function(txt, num) {
+    let txtArray = ready(txt)
+    let newAlArray = move(num)
+    // console.log(txtArray)
+    for ( ii = 0; ii < txtArray.length; ii ++){
+        // console.log(txtArray[ii])
+        // console.log(alArray.findIndex(e => e === txtArray[ii]))
         txtArray[ii] = newAlArray[alArray.findIndex(e => e === txtArray[ii])]
     }
     // console.log(txtArray)
@@ -44,5 +58,6 @@ const caesarEncryption = function(txt, num) {
 }
 
 console.log(caesarEncryption(text, 9))
+console.log(caesarDecryption(caesarEncryption(text, 9), 9))
 // console.log(ready(text))
 // console.log(caesar(1))
