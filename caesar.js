@@ -1,7 +1,7 @@
 let text = "my name is Bill"
 
-const al = "abcdefghijklmnopqrstuvwxyz"
-const alArray = al.split("")
+let al = "abcdefghijklmnopqrstuvwxyz"
+let alArray = al.split("")
 
 const ready = function (txt) {
     return txt.replace(/ /g, "").toLowerCase().split("")
@@ -57,7 +57,7 @@ const caesarDecryption = function(txt, num) {
     return txtArray.join("")
 }
 
-console.log(caesarEncryption(text, 9))
+console.log(caesarEncryption(text, 3))
 console.log(caesarDecryption(caesarEncryption(text, 9), 9))
 // console.log(ready(text))
 // console.log(caesar(1))

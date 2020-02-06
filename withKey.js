@@ -1,13 +1,12 @@
-let text = "my and is bill"
-
-const al = "abcdefghijklmnopqrstuvwxyz"
-const alArray = al.split("")
+let text = "my name is bill"
 
 const ready = function (txt) {
     return txt.replace(/ /g, "").toLowerCase().split("")
 }
 
 const move = function (step) {
+    let al = "abcdefghijklmnopqrstuvwxyz"
+    let alArray = al.split("")
     let alphabet = []
     for (ii = 0; ii < 26; ii++) {
         alphabet.push(ii)
@@ -29,24 +28,62 @@ const move = function (step) {
     return afterStepAlphabet
 }
 
-const caesarEncryption = function(txt, num) {
+const caesarEncryption = function (txt, num) {
+    let al = "abcdefghijklmnopqrstuvwxyz"
+    let alArray = al.split("")
     let txtArray = ready(txt)
     let newAlArray = move(num)
-    for ( ii = 0; ii < txtArray.length; ii ++){
+    for (ii = 0; ii < txtArray.length; ii++) {
+        txtArray[ii] = alArray[newAlArray.findIndex(e => e === txtArray[ii])]
+    }
+    return txtArray.join("")
+}
+
+const caesarDecryption = function (txt, num) {
+    let al = "abcdefghijklmnopqrstuvwxyz"
+    let alArray = al.split("")
+    let txtArray = ready(txt)
+    let newAlArray = move(num)
+    for (ii = 0; ii < txtArray.length; ii++) {
         txtArray[ii] = newAlArray[alArray.findIndex(e => e === txtArray[ii])]
     }
     return txtArray.join("")
 }
 
-const withKey = function(txt, key) {
-    let keyArray = key.split("")
+const withKeyEncryption = function (text, keyArray) {
     let keyArrayLength = keyArray.length
-    let txtLength = txt.length
-    if( keyArrayLength <= txtLength) {
-        for( ii = 0; ii < txtLength; ii ++){
-            keyArray = keyArray.push(keyArray[ii])
+    let txt = text
+    let txtArray = ready(txt)
+    let txtLength = txtArray.length
+    // console.log(keyArray)
+    if (keyArrayLength <= txtLength) {
+        for (ii = 0; ii < txtLength - keyArrayLength; ii++) {
+            keyArray.push(keyArray[ii])
         }
     }
+    let encryptionResults = []
+    for (aa = 0; aa < txtLength; aa++) {
+        encryptionResults.push(caesarEncryption(txtArray[aa], keyArray[aa]))
+    }
+    return encryptionResults.join("")
 }
 
-console.log(Hello)
+const withKeyDecryption = function (text, keyArray) {
+    let keyArrayLength = keyArray.length
+    let txt = text
+    let txtArray = ready(txt)
+    let txtLength = txtArray.length
+    if (keyArrayLength <= txtLength) {
+        for (ii = 0; ii < txtLength - keyArrayLength; ii++) {
+            keyArray.push(keyArray[ii])
+        }
+    }
+    let encryptionResults = []
+    for (aa = 0; aa < txtLength; aa++) {
+        encryptionResults.push(caesarDecryption(txtArray[aa], keyArray[aa]))
+    }
+    return encryptionResults.join("")
+}
+
+console.log(withKeyEncryption(text, [3, 1, 9, 14]))
+console.log(withKeyDecryption(withKeyEncryption(text, [3, 1, 9, 14]), [3, 1, 9, 14]))
