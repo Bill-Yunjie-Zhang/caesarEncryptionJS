@@ -1,4 +1,4 @@
-const readyText = (txt) => {
+const readyText = function (txt) {
     return txt.replace(/ /g, "").toLowerCase().split("")
 }
 
