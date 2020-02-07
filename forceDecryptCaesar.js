@@ -1,5 +1,13 @@
-const ready = function (txt) {
-    return txt.replace(/ /g, "").toLowerCase().split("")
+const ready = (txt) => {
+    let txtArr = []
+    let al = "abcdefghijklmnopqrstuvwxyz"
+    let alArray = al.split("")
+    txt.replace(/ /g, "").toLowerCase().split("").forEach(e => {
+        if (alArray.find(ele => ele === e)){
+            txtArr.push(e)
+        }
+    });
+    return txtArr
 }
 
 const move = function (step) {
@@ -52,3 +60,6 @@ const checkStep = function (encryptedTxt, txt) {
         return "incorrect text"
     }
 }
+
+console.log(forceDecryptCaesar("lqpbbrxqjhudqgpruhyxoqhudeohbhduvpbi"))
+console.log(checkStep("lqpbbrxqjhudqgpruhyxoqhudeohbhduvpbi", "inmyyoungerandmorevulnerableyearsmyf"))
